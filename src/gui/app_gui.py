@@ -113,7 +113,7 @@ if prompt := st.chat_input("Tôi có thể giúp gì được cho bạn?"):
     # Call the FastAPI backend
     try:
         response = requests.post(
-            "http://localhost:8000/qa-vn-news",  # Replace with your FastAPI URL
+            "http://0.0.0.0:8000/qa-vn-news",  # Replace with your FastAPI URL
             json={"question": prompt}
         )
         response.raise_for_status()  # Raise an error for bad responses
