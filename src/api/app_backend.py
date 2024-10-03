@@ -17,11 +17,14 @@ class AssistantResponse(BaseModel):
 @app.post("/qa-vn-news", response_model=AssistantResponse)
 def get_response(data: UserPromptRequest):
     try:
-        answer, url = pipeline(data.question)
+        print(f"Received question: {data.question}")
+        answer,url = pipeline(data.question)
+        print(f"Response answer: {answer}")
+        print(f"Response url: {answer}")
+
         return AssistantResponse(
             answer=answer,
             url=url
         )
-        
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

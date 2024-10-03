@@ -138,12 +138,8 @@ def translate_vi2eng(input_text):
 
 def pipeline(question):
     question_translate = translate_vi2eng(question)
-    print("question_translate", question_translate)
     question_embedding = embedding_text(question_translate)
-    print("question_embedding", question_embedding)
     list_id, list_url = retrieval_context(question_embedding,3)
-    print("list_id", list_id)
-    print("list_url", list_url)
     context = mapping_data(list_id,list_url)
     print("context", context)
     result, url = chatbot(question_translate,context)
