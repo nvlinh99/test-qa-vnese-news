@@ -45,22 +45,6 @@ def retrieval_context(vector_embedding,topk):
         list_url.append(item["metadata"]["url"])
     return list_id,list_url
 
-def mapping_data(list_id,list_url):
-    file_path = 'src/api/model/total_output_clean.pkl'  # Updated relative path
-    with open(file_path, 'rb') as file:
-        total_output_clean = pickle.load(file)
-        
-    total_text_with_link = []
-    for index,url in zip(list_id,list_url): 
-        total_text_with_link.append(f"{total_output_clean[index]}, link:{url}")
-    
-    sentence_list = total_text_with_link
-
-    formatted_string = '; '.join([f'"{sentence}"' for sentence in sentence_list])
-
-    result_context = f"[{formatted_string}]"
-    
-    return result_context
 
 def mapping_data(list_id, list_url):
     file_path = 'src/api/model/total_output_clean.pkl'
@@ -72,7 +56,6 @@ def mapping_data(list_id, list_url):
     for index,url in zip(list_id,list_url): 
         print("index", index)
         print("url", url)
-        print("total_output_clean[index]", total_output_clean[index])
         total_text_with_link.append(f"{total_output_clean[index]}, link:{url}")
     
 #     with open('/kaggle/input/llm-chatbot/total_chunks.pkl', 'rb') as file:
