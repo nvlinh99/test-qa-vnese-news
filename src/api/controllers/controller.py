@@ -66,7 +66,8 @@ def mapping_data(list_id, list_url):
     file_path = 'src/api/model/total_output_clean.pkl'
     with open(file_path, 'rb') as file:
         total_output_clean = pickle.load(file)
-        
+    
+    print("LOAD PKL PASS")
     total_text_with_link = []
     for index,url in zip(list_id,list_url): 
         total_text_with_link.append(f"{total_output_clean[index]}, link:{url}")
@@ -75,13 +76,13 @@ def mapping_data(list_id, list_url):
 #         total_chunks = pickle.load(file)
     # Turn list to string
     sentence_list = total_text_with_link
-
+    print("sentence_list", sentence_list)
     # Convert the list to a string in the desired format
     formatted_string = '; '.join([f'"{sentence}"' for sentence in sentence_list])
-
+    print("formatted_string", formatted_string)
     # Add brackets around the final string
     result_context = f"[{formatted_string}]"
-    
+    print("result_context", result_context)
 #     print(result_context)
     return result_context
 
@@ -140,6 +141,8 @@ def pipeline(question):
     question_translate = translate_vi2eng(question)
     question_embedding = embedding_text(question_translate)
     list_id, list_url = retrieval_context(question_embedding,3)
+    print("list_id", list_id)
+    print("list_url", list_url)
     context = mapping_data(list_id,list_url)
     print("context", context)
     result, url = chatbot(question_translate,context)
