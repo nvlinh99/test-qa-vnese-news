@@ -70,6 +70,9 @@ def mapping_data(list_id, list_url):
     print("LOAD PKL PASS")
     total_text_with_link = []
     for index,url in zip(list_id,list_url): 
+        print("index", index)
+        print("url", url)
+        print("total_output_clean[index]", total_output_clean[index])
         total_text_with_link.append(f"{total_output_clean[index]}, link:{url}")
     
 #     with open('/kaggle/input/llm-chatbot/total_chunks.pkl', 'rb') as file:
